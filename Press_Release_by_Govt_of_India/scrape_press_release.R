@@ -4,12 +4,13 @@ library(rvest)
 library(stringr)
 library(lubridate)
 
-scrape_press_release_data <- function(pr_start = 1, pr_end = 171322) {
+scrape_press_release_data <- function(pr_start = 1479900, pr_end = 1625157) { #Have changed the numbers here.
     #create empty df to hold all the data
     pr_df <- data.frame(matrix(ncol = 5, nrow = 0))
     pr_df_colnames <- c("id","datetime","ministry_name","title","content")
     colnames(pr_df) <- pr_df_colnames
-    pr_base_url <- "http://pib.nic.in/newsite/PrintRelease.aspx?relid="
+    #pr_base_url <- "http://pib.nic.in/newsite/PrintRelease.aspx?relid=" #Starting 2017 the new ID is mentioned below
+    pr_base_url<-"https://pib.gov.in/PressReleaseIframePage.aspx?PRID="
     
     for(pr_id in pr_start:pr_end) {
         pr_url <- paste(pr_base_url,pr_id, sep="")
